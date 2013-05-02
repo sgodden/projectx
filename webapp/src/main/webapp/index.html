@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Customer orders</title>
+    <link rel="stylesheet" href="dojo-style.css"/>
+    <script src="dojo/dojo.js" data-dojo-config="async: true"></script>
+    <script type="text/javascript">
+//        require(["dojo/_base/xhr"], function(xhr){
+//            xhr.get({
+//                url: "services/customerOrders",
+//                handleAs: "json",
+//                load: function(result) {
+//                    alert("Response is: " + result[0].orderNumber);
+//                }
+//            });
+//        });
+
+        require(["dojo/store/JsonRest", "dojo/dom", "dojo/on",
+                "dojo/dom-construct", "dojo/date/stamp", "dojo/date/locale"],
+                function(JsonRest, dom, on, domConstruct, stamp, locale) {
+
+            masterStore = new JsonRest({
+                "target": "services/customer-orders/",
+                "idProperty": "id"
+            });
+
+            var results = masterStore.query();
+            viewResults(results);
+
+            function viewResults(results) {
+                var container = dom.byId("container");
+                var rows = [];
+
+                results.forEach(insertRow);
+
+                function insertRow(item, i) {
+                    var row = domConstruct.create("tr");
+
+                    var editLinkTd = domConstruct.create("td", {}, row);
+                    var editLink = domConstruct.create("a", {
+                        "href": '#',
+                        "id": 'edit-' + item.id,
+                        "innerHTML": item.orderNumber
+                    }, editLinkTd);
+
+                    domConstruct.create("td", {
+                        "innerHTML": item.customerReference
+                    }, row);
+                    var date = stamp.fromISOString(item.bookingDate);
+                    domConstruct.create("td", {
+                        "innerHTML": locale.format(date, {
+                            "formatLength": "medium",
+                            "selector": "date"
+                        })
+                    }, row);
+
+                    var removeLinkTd = domConstruct.create("td", {}, row);
+                    var removeLink = domConstruct.create("a", {
+                        "href": '#',
+                        "id": 'id-' + item.id,
+                        "innerHTML": 'Remove'
+                    }, removeLinkTd);
+
+                    rows.splice(i, 0, container.insertBefore(row, rows[i]));
+                }
+            }
+        });
+
+    </script>
+</head>
+<body>
+<h1 id="greeting">Customer Orders</h1>
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>Order number</th>
+            <th>Customer reference</th>
+            <th>Booking date</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody id="container">
+
+    </tbody>
+</table>
+
+<div id="controls">
+    <input type="button" id="addButton" value="Add"/>
+</div>
+
+</body>
+
+</html>

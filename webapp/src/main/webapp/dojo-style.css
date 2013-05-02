@@ -1,0 +1,21 @@
+h1 {
+    font-style: italic;
+}
+
+table#dataTable {
+    padding: 0.5em;
+    border: 1px #aaaaaa solid;
+    margin-bottom: 1em;
+}
+
+table#dataTable a {
+    color: black;
+}
+
+table#dataTable th {
+    text-align: left;
+}
+
+table#dataTable td, th {
+    padding-right: 1em;
+}

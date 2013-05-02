@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       " >
+
+    <!-- -->
+    <context:annotation-config/>
+    
+    <!--
+        instructs the bean factory that it should be configuring
+        instances of classes annotated as @Configurable.
+    -->
+    <context:spring-configured/>
+
+    <context:property-placeholder system-properties-mode="OVERRIDE"/>
+
+    <bean id="customerOrderRepository" class="org.sgodden.tom.persistence.CustomerOrderRepositoryImpl">
+        <constructor-arg value="orderManagement-${env}"/>
+    </bean>
+
+</beans>
