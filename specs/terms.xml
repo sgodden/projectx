@@ -15,4 +15,12 @@
             ]]>
         </description>
     </term>
+    <term>
+        <id>Shipment</id>
+        <description>
+            <![CDATA[
+                Some goods to be transported from one place to another
+            ]]>
+        </description>
+    </term>
 </terms>
