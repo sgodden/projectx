@@ -1,0 +1,18 @@
+<terms>
+    <term>
+        <id>Customer</id>
+        <description>
+            <![CDATA[
+                Someone who wants {shipments|Shipment} transporting from one place to another
+            ]]>
+        </description>
+    </term>
+    <term>
+        <id>Customer Order</id>
+        <description>
+            <![CDATA[
+                An order placed by a {Customer} which ultimately causes the movement of one or more {shipments|Shipment}.
+            ]]>
+        </description>
+    </term>
+</terms>
