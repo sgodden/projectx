@@ -14,11 +14,13 @@ Feature: Order templates
 		When I start to create a new order
 		Then the system should present a list of recent orders for me to use as a template
 
+
 	Scenario: Search for an order to use as a template
 
 		Given that I have previously entered orders on the system
 		When I start to create a new order
 		Then I should be able to transfer to the order search function so that I can find a specific order to use as a template
+		
 
 	Scenario: Create a new order from an existing order
 
