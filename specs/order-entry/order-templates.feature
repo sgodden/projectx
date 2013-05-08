@@ -7,7 +7,7 @@ Feature: Order templates
 	As a customer
 	In order to enter an order quickly
 	I should be able to pick a previous order as a template
-	
+
 
 	Scenario: Use a recent order as a template
 
