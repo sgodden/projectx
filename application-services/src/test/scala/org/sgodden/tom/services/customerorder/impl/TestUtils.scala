@@ -1,4 +1,4 @@
-package org.sgodden.tom.integration
+package org.sgodden.tom.services.customerorder.impl
 
 import org.sgodden.tom.model.CustomerOrderRepository
 

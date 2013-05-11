@@ -1,14 +1,12 @@
-package org.sgodden.tom.integration.services
+package org.sgodden.tom.services.customerorder.impl
 
 import org.sgodden.tom.services.customerorder.CustomerOrderService
 import org.testng.Assert._
 import org.sgodden.tom.model.{ValidationException, CustomerOrderStatus, ICustomerOrder}
 import org.springframework.beans.factory.annotation.Autowired
-import org.sgodden.tom.integration.AbstractIntegrationTest
 import org.testng.annotations.{BeforeMethod, Test}
 
-@Test
-class CustomerServiceTest extends AbstractIntegrationTest {
+class CustomerOrderServiceIT extends AbstractIntegrationTest {
 
   @Autowired private var customerOrderService: CustomerOrderService = null
 
@@ -18,16 +16,19 @@ class CustomerServiceTest extends AbstractIntegrationTest {
     }
   }
 
+  @Test
   def testCreate {
     var order: ICustomerOrder = customerOrderService.create
     assertEquals(order.getStatus, CustomerOrderStatus.NEW)
   }
 
+  @Test
   def testPersist {
     createOrder(1)
     assertEquals(customerOrderService.findAll.size, 1)
   }
 
+  @Test
   def testInvalidOrderIsNotPersisted {
     val order = makeOrder(1);
     order.setCustomerReference("wrong")
@@ -39,6 +40,7 @@ class CustomerServiceTest extends AbstractIntegrationTest {
     assertEquals(customerOrderService.findAll.size, 0)
   }
 
+  @Test
   def testFindAll {
     (1 to 10).foreach(createOrder(_))
     assertEquals(customerOrderService.findAll.size, 10)
