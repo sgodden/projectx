@@ -16,7 +16,7 @@ class CustomerOrderServiceImpl extends CustomerOrderService {
 
   override def persist(customerOrder: ICustomerOrder) = {
     repository.persist(customerOrder)
-    customerOrder.getId
+    customerOrder.id
   }
 
   override def remove(id: String) = repository.remove(repository.findById(id))

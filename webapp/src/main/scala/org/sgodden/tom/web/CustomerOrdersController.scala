@@ -31,7 +31,7 @@ class CustomerOrdersController {
 
   implicit def orderToListEntry(order: ICustomerOrder): ListEntry = {
     new ListEntry (
-      id = order.getId,
+      id = order.id,
       customerReference = order.getCustomerReference,
       orderNumber = order.getOrderNumber,
       bookingDate = order.getBookingDate,

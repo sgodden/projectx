@@ -5,7 +5,7 @@ import org.apache.commons.lang.builder.{HashCodeBuilder, EqualsBuilder}
 
 trait Identity[T] extends Serializable {
 
-  def getId: String
+  def id: String
 
   override def equals(other: Any): Boolean = {
     if (other == null
@@ -15,18 +15,18 @@ trait Identity[T] extends Serializable {
 
     val o = other.asInstanceOf[Identity[T]]
 
-    if (o.getId == 0 || getId == 0) {
+    if (o.id == 0 || id == 0) {
       return super.equals(other)
     }
     else {
-      return new EqualsBuilder().append(this.getId, o.getId).isEquals
+      return new EqualsBuilder().append(this.id, o.id).isEquals
     }
   }
 
   override def hashCode: Int = {
-    if (getId == null) {
+    if (id == null) {
       return super.hashCode
     }
-    return new HashCodeBuilder(23, 61).append(getId).toHashCode
+    return new HashCodeBuilder(23, 61).append(id).toHashCode
   }
 }

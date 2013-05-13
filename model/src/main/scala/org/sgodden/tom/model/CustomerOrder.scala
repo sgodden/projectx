@@ -10,11 +10,8 @@ import JavaConverters._
 import javax.validation.{ConstraintViolation, Validation}
 import org.slf4j.{LoggerFactory, Logger}
 
-// TODO - modify to use joda time
 @Configurable
-class CustomerOrder() extends ICustomerOrder {
-
-  var _id: String = null
+class CustomerOrder() extends ICustomerOrder with Identifiable {
 
   @NotNull
   @Pattern(regexp = "cr.*", message = "{customerReferenceMustBeginWithCr}")
@@ -31,12 +28,6 @@ class CustomerOrder() extends ICustomerOrder {
 
   @Autowired
   private var stateObjects: JavaMap[String, CustomerOrderState] = null
-
-  def getId = _id
-
-  def setId(id: String) {
-    this._id = id
-  }
 
   override def cancel {
     getStateObject.cancel(this)

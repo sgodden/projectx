@@ -22,7 +22,7 @@ class CustomerOrderRepositoryImpl(databaseName: String) extends CustomerOrderRep
 
   def remove(order: ICustomerOrder) {
     order.asInstanceOf[CustomerOrder].approveRemove(() => {
-      coll.remove(MongoDBObject("_id" -> new ObjectId(order.getId)))
+      coll.remove(MongoDBObject("_id" -> new ObjectId(order.id)))
     })
   }
 
@@ -35,7 +35,7 @@ class CustomerOrderRepositoryImpl(databaseName: String) extends CustomerOrderRep
   def persist(order: ICustomerOrder) {
     order.asInstanceOf[CustomerOrder].approvePersist(() => {
       coll.save(grater[CustomerOrderP].asDBObject(CustomerOrderP(order)))
-      order.asInstanceOf[CustomerOrder].setId(coll.last.get("_id").toString)
+      order.asInstanceOf[CustomerOrder].id = coll.last.get("_id").toString
     })
   }
 

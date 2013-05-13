@@ -35,9 +35,9 @@ class CustomerOrderRepositoryImplTest extends AbstractTestNGSpringContextTests {
 
     repo persist order
 
-    LOG.info("ID: " + order.getId)
+    LOG.info("ID: " + order.id)
 
-    order = repo findById order.getId
+    order = repo findById order.id
 
     LOG info order.orderNumber
 

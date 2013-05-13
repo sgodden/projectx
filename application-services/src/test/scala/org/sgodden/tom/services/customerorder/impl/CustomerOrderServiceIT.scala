@@ -12,7 +12,7 @@ class CustomerOrderServiceIT extends AbstractIntegrationTest {
 
   @BeforeMethod def beforeTest {
     for (order <- customerOrderService.findAll) {
-      customerOrderService.remove(order.getId)
+      customerOrderService.remove(order.id)
     }
   }
 
