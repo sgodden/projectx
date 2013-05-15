@@ -5,7 +5,8 @@ import org.apache.commons.lang.builder.{HashCodeBuilder, EqualsBuilder}
 
 trait Identity[T] extends Serializable {
 
-  def id: String
+  // FIXME - prefer to have the string as immutable
+  var id: String
 
   override def equals(other: Any): Boolean = {
     if (other == null

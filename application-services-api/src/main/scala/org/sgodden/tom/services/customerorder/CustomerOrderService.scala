@@ -15,4 +15,12 @@ trait CustomerOrderService {
   def merge(order: ICustomerOrder)
 
   def findById(id: String): ICustomerOrder
+
+  /**
+   *
+   * @param orderId
+   * @param scannerId
+   * @param eventType
+   */
+  def scan(orderId: String, scannerId: String, eventType: ScanEventType)
 }

@@ -8,13 +8,13 @@ import scala.collection.mutable
 import com.novus.salat._
 import com.novus.salat.global._
 
-case class CustomerOrderP(
+case class CustomerOrderP (
     _id: ObjectId,
     customerReference: String, 
     orderNumber: String,
     bookingDate: DateTime,
     orderLines: Set[CustomerOrderLine]
-  ) {
+  ) extends BaseP[CustomerOrder] {
 
   implicit def dateTimeToLocalDate(dateTime: DateTime) = {
     new LocalDate(dateTime.getMillis)
