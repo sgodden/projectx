@@ -1,10 +1,8 @@
 package org.sgodden.tom.persistence
 
-import com.novus.salat._
 import com.mongodb.casbah.Imports._
 import com.mongodb.casbah.commons.conversions.scala._
-import org.sgodden.tom.persistence.model.{BaseP, CustomerOrderP}
-import org.sgodden.tom.model.{Identity, CustomerOrder, ICustomerOrder, CustomerOrderRepository}
+import org.sgodden.tom.model._
 import com.mongodb.casbah.MongoConnection
 import com.mongodb.casbah.commons.MongoDBObject
 import org.bson.types.ObjectId
@@ -32,12 +30,30 @@ abstract class BaseRepositoryImpl[ T <: Identity[T] ](databaseName: String, coll
   }
 
   def persist(entity: T) {
-    coll.save(toDBobject(entity))
-    entity.id = coll.last.get("_id").toString
+    val _persist = () => {
+      coll.save(toDBobject(entity))
+      entity.id = coll.last.get("_id").toString
+    }
+
+    if (entity.isInstanceOf[ValidatingEntity]) {
+      entity.asInstanceOf[ValidatingEntity].approvePersist(_persist)
+    }
+    else {
+      _persist
+    }
   }
 
   def merge(entity: T) {
-    coll.save(toDBobject(entity))
+    val _merge = () => {
+      coll.save(toDBobject(entity))
+    }: Unit
+
+    if (entity.isInstanceOf[ValidatingEntity]) {
+      entity.asInstanceOf[ValidatingEntity].approvePersist(_merge)
+    }
+    else {
+      _merge
+    }
   }
 
   def findById(id: String) =

@@ -13,18 +13,4 @@ class CustomerOrderRepositoryImpl(databaseName: String) extends BaseRepositoryIm
 
   def toDBobject(entity: ICustomerOrder): DBObject = _grater.asDBObject(CustomerOrderP(entity))
   def toObject(dbObj: DBObject): ICustomerOrder = _grater.asObject(dbObj).asObject
-
-  implicit def toCustomerOrder(entity: ICustomerOrder): CustomerOrder = entity.asInstanceOf[CustomerOrder]
-
-  override def persist(entity: ICustomerOrder) = {
-    entity.approvePersist( () => {
-      super.persist(entity)
-    })
-  }
-
-  override def merge(entity: ICustomerOrder) = {
-    entity.approvePersist( () => {
-      super.merge(entity)
-    })
-  }
 }

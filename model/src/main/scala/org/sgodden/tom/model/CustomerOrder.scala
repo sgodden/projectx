@@ -11,7 +11,7 @@ import javax.validation.{ConstraintViolation, Validation}
 import org.slf4j.{LoggerFactory, Logger}
 
 @Configurable
-class CustomerOrder() extends ICustomerOrder with Identifiable {
+class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEntity {
 
   @NotNull
   @Pattern(regexp = "cr.*", message = "{customerReferenceMustBeginWithCr}")
