@@ -1,6 +1,7 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
 
 import javax.validation.constraints.NotNull
+import org.sgodden.tom.model.IAddress
 
 case class Address (
   @NotNull

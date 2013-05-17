@@ -1,4 +1,6 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
+
+import org.sgodden.tom.model.CustomerOrderStatus
 
 class CustomerOrderCancelCommand {
 

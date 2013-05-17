@@ -4,6 +4,7 @@ import org.testng.annotations.Test
 import org.testng.Assert._
 import javax.validation.{ConstraintViolation, Validation}
 import org.joda.time.{LocalDate, DateTime}
+import org.sgodden.tom.model.impl.CustomerOrder
 
 @Test
 class CustomerOrderTest {

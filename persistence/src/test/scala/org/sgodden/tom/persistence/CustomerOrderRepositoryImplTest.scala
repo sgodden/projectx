@@ -5,7 +5,7 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.beans.factory.annotation.Autowired
 import org.testng.annotations.Test
 import org.slf4j.LoggerFactory
-import org.sgodden.tom.model.{CustomerOrderLine, CustomerOrder}
+import org.sgodden.tom.model.impl.{CustomerOrderLine, CustomerOrder}
 
 @ContextConfiguration(locations = Array(
   "classpath:org/sgodden/tom/persistence/beans.xml",

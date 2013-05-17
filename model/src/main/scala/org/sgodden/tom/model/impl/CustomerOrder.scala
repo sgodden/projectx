@@ -1,14 +1,15 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
 
 import javax.validation.constraints.{Pattern,NotNull}
 import collection.mutable.{HashSet, Set => MutableSet}
 import org.springframework.beans.factory.annotation.{Configurable, Autowired}
 import java.util.{Date, Map => JavaMap}
-import org.joda.time.{LocalDate, DateTime}
+import org.joda.time.LocalDate
 import collection.JavaConverters
 import JavaConverters._
 import javax.validation.{ConstraintViolation, Validation}
 import org.slf4j.{LoggerFactory, Logger}
+import org.sgodden.tom.model._
 
 @Configurable
 class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEntity {

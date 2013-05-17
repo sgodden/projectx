@@ -2,11 +2,12 @@ package org.sgodden.tom.persistence.model
 
 import org.bson.types.ObjectId
 import org.joda.time.{DateTimeZone, LocalDate, DateTime}
-import org.sgodden.tom.model.{ICustomerOrderLine, CustomerOrderLine, CustomerOrder, ICustomerOrder}
+import org.sgodden.tom.model.{ICustomerOrderLine, ICustomerOrder}
 import com.mongodb.DBObject
 import scala.collection.mutable
 import com.novus.salat._
 import com.novus.salat.global._
+import org.sgodden.tom.model.impl.{CustomerOrderLine, CustomerOrder}
 
 case class CustomerOrderP (
     _id: ObjectId,

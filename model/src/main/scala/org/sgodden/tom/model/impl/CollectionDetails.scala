@@ -1,11 +1,12 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
 
-class DeliveryDetails extends IDeliveryDetails {
+import org.sgodden.tom.model.{IAddress, ICollectionDetails}
+
+class CollectionDetails extends ICollectionDetails {
 
   private var address: Address = null
 
   def getAddress = address
-
   def setAddress(address: IAddress) {
     this.address = address.asInstanceOf[Address]
   }

@@ -1,4 +1,4 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
 
 trait Identifiable {
 

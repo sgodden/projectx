@@ -6,6 +6,7 @@ import org.sgodden.tom.model._
 import com.mongodb.casbah.MongoConnection
 import com.mongodb.casbah.commons.MongoDBObject
 import org.bson.types.ObjectId
+import org.sgodden.tom.model.impl.ValidatingEntity
 
 abstract class BaseRepositoryImpl[ T <: Identity[T] ](databaseName: String, collectionName: String) {
 

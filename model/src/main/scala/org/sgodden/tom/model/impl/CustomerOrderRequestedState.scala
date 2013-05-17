@@ -1,10 +1,11 @@
-package org.sgodden.tom.model
+package org.sgodden.tom.model.impl
 
 import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
+import org.sgodden.tom.model.CustomerOrderStatus
 
 @Component
-class CustomerOrderNewState extends AbstractCustomerOrderState {
+class CustomerOrderRequestedState extends AbstractCustomerOrderState {
 
   @Autowired
   private var confirmCommand: CustomerOrderConfirmCommand = null
@@ -14,7 +15,7 @@ class CustomerOrderNewState extends AbstractCustomerOrderState {
   }
 
   def ship(order: CustomerOrder) {
-    throw new IllegalStateException("An order may not be shipped from the new state")
+    throw new IllegalStateException("An order may not be shipped from the requested state")
   }
 
   def cancel(order: CustomerOrder) {

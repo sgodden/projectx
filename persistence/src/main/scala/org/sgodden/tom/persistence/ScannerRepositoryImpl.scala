@@ -3,7 +3,7 @@ package org.sgodden.tom.persistence
 import com.novus.salat._
 import com.novus.salat.global._
 import org.sgodden.tom.persistence.model.ScannerP
-import org.sgodden.tom.model.{ScannerRepository, Scanner, IScanner}
+import org.sgodden.tom.model.{ScannerRepository, IScanner}
 import com.mongodb.casbah.query.Imports._
 
 class ScannerRepositoryImpl(databaseName: String) extends BaseRepositoryImpl[IScanner](databaseName, "scanners")
