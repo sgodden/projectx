@@ -1,7 +1,7 @@
 package org.sgodden.tom.persistence
 
 import org.sgodden.tom.persistence.model.CustomerOrderP
-import org.sgodden.tom.model.{CustomerOrder, CustomerOrderRepository, ICustomerOrder}
+import org.sgodden.tom.model.{CustomerOrderRepository, ICustomerOrder}
 import com.novus.salat._
 import com.novus.salat.global._
 import com.mongodb.casbah.query.Imports._
