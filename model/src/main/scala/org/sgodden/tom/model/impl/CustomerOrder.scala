@@ -17,8 +17,17 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   @NotNull
   @Pattern(regexp = "cr.*", message = "{customerReferenceMustBeginWithCr}")
   var customerReference: String = null
-  @NotNull
-  var orderNumber: String = null
+  private var _orderNumber: String = null
+
+  /*
+   * Example of information hiding - the trait defines a var but we are still in control :)
+   */
+  def orderNumber: String = { _orderNumber }
+  def orderNumber_=(value: String) {
+    println("Setting order number to: " + value)
+    this._orderNumber = value
+  }
+
   @NotNull
   var status: CustomerOrderStatus.Value = CustomerOrderStatus.NEW
   @NotNull
@@ -29,6 +38,16 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
 
   @Autowired
   private var stateObjects: JavaMap[String, CustomerOrderState] = null
+
+  /*
+   * Method here purely to satisfy hibernate validator which insists on JavaBeans conventions, so if you
+   * are doing the information hiding tricks above you need to provide a method like this on which to put
+   * your validator annotations.
+   */
+  @NotNull
+  def getOrderNumber: String = {
+    _orderNumber
+  }
 
   override def cancel {
     getStateObject.cancel(this)
