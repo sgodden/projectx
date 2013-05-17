@@ -1,6 +1,7 @@
 package org.sgodden.tom.services.customerorder
 
 import org.sgodden.tom.model.ICustomerOrder
+import org.sgodden.tom.model.ScanEventType._
 
 trait CustomerOrderService {
 

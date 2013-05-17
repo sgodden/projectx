@@ -9,16 +9,14 @@ import com.mongodb.casbah.MongoConnection
 import com.mongodb.casbah.commons.MongoDBObject
 import org.bson.types.ObjectId
 
-abstract class BaseRepositoryImpl[ T <: Identity[AnyRef] ](databaseName: String) {
+abstract class BaseRepositoryImpl[ T <: Identity[T] ](databaseName: String, collectionName: String) {
 
   val conn = MongoConnection()
   val db = conn(databaseName)
   val coll = db(collectionName)
 
-  val collectionName: String
-
-  def toCaseClassInstance(entity: T): BaseP[AnyRef]
-  def getGrater: Grater[BaseP[AnyRef]]
+  def toDBobject(entity: T): DBObject
+  def toObject(dbObj: DBObject): T
 
   RegisterConversionHelpers()
   RegisterJodaTimeConversionHelpers()
@@ -29,23 +27,23 @@ abstract class BaseRepositoryImpl[ T <: Identity[AnyRef] ](databaseName: String)
 
   def findAll = {
     coll.map(dbo => {
-      getGrater.asObject(dbo).asObject
+      toObject(dbo)
     }).toList
   }
 
   def persist(entity: T) {
-    coll.save(getGrater.asDBObject(toCaseClassInstance(entity)))
+    coll.save(toDBobject(entity))
     entity.id = coll.last.get("_id").toString
   }
 
   def merge(entity: T) {
-    coll.save(getGrater.asDBObject(toCaseClassInstance(entity)))
+    coll.save(toDBobject(entity))
   }
 
   def findById(id: String) =
-    getGrater.asObject(coll.findOne(MongoDBObject("_id" -> new ObjectId(id))).get).asObject
+    toObject(coll.findOne(MongoDBObject("_id" -> new ObjectId(id))).get)
 
-  def count = {
+  def count: Long = {
     coll.size
   }
 

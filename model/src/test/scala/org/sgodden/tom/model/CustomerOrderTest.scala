@@ -20,9 +20,8 @@ class CustomerOrderTest {
 
   def customerReferenceMustBeginWithCr() {
     val order = new CustomerOrder {
-      setOrderNumber("ordnum")
+      orderNumber = "ordnum"
       setCustomerReference("foo")
-      setBookingDate(new LocalDate)
     }
     // TODO - message should be i18nd
     assertTrue(containsViolation(getViolations(order), "customerReference", "Customer reference must begin with 'cr'"))

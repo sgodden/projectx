@@ -64,7 +64,7 @@ class CustomerOrderServiceIT extends AbstractIntegrationTest {
   private def makeOrder(seq: Int) = {
     var order: ICustomerOrder = customerOrderService.create
     order.setCustomerReference("crREFERENCE: " + seq)
-    order.setOrderNumber("ORDER NUMBER: " + seq)
+    order.orderNumber = "ORDER NUMBER: " + seq
     order
   }
 }

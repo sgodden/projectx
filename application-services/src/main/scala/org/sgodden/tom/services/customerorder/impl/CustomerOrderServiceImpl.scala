@@ -1,16 +1,14 @@
 package org.sgodden.tom.services.customerorder.impl
 
 import org.sgodden.tom.services.customerorder.CustomerOrderService
+import org.sgodden.tom.model.ScanEventType._
 import org.sgodden.tom.model.{ICustomerOrder, CustomerOrderFactory, CustomerOrderRepository}
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
-class CustomerOrderServiceImpl extends CustomerOrderService {
-
-  @Autowired private var repository: CustomerOrderRepository = null
-  @Autowired private var factory: CustomerOrderFactory = null
+class CustomerOrderServiceImpl(
+    repository: CustomerOrderRepository,
+    factory: CustomerOrderFactory) extends CustomerOrderService {
 
   override def create: ICustomerOrder = factory.create
 
@@ -27,4 +25,16 @@ class CustomerOrderServiceImpl extends CustomerOrderService {
 
   override def findById(id: String): ICustomerOrder = repository.findById(id)
 
+  /**
+   *
+   * @param orderId
+   * @param scannerId
+   * @param eventType
+   */
+  def scan(orderId: String, scannerId: String, eventType: ScanEventType) {
+    eventType match {
+      case LOAD => println("LOAD!!")
+      case UNLOAD => println("UNLOAD!!")
+    }
+  }
 }

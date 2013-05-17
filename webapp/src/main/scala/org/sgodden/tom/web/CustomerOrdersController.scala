@@ -33,8 +33,8 @@ class CustomerOrdersController {
     new ListEntry (
       id = order.id,
       customerReference = order.getCustomerReference,
-      orderNumber = order.getOrderNumber,
-      bookingDate = order.getBookingDate,
+      orderNumber = order.orderNumber,
+      bookingDate = order.bookingDate,
       orderLines = order.getOrderLines
     )
   }
@@ -128,9 +128,9 @@ case class ListEntry(
                     bookingDate: LocalDate,
                     orderLines: Array[OrderLine] = Array()) {
   def merge(order: ICustomerOrder) {
-    order.setOrderNumber(orderNumber)
+    order.orderNumber = orderNumber
     order.setCustomerReference(customerReference)
-    order.setBookingDate(bookingDate)
+    order.bookingDate = bookingDate
   }
 }
 

@@ -11,14 +11,12 @@ trait ICustomerOrder extends Identity[ICustomerOrder] {
 
   def ship
 
-  def getBookingDate: LocalDate
-  def setBookingDate(cal: LocalDate)
+  var bookingDate: LocalDate
 
   def getCustomerReference: String
   def setCustomerReference(reference: String)
 
-  def getOrderNumber: String
-  def setOrderNumber(orderNumber: String)
+  var orderNumber: String
 
   def getCollectionDetails: ICollectionDetails
   def setCollectionDetails(details: ICollectionDetails)

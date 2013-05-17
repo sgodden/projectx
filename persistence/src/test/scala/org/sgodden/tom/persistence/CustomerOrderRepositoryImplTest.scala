@@ -21,7 +21,7 @@ class CustomerOrderRepositoryImplTest extends AbstractTestNGSpringContextTests {
   @Test
   def testCreateAndRetrieve {
     LOG info "ASDASD"
-    var order = new CustomerOrder
+    val order = new CustomerOrder
 
     order.orderNumber = "ord001"
     order.customerReference = "cr001"
@@ -37,11 +37,11 @@ class CustomerOrderRepositoryImplTest extends AbstractTestNGSpringContextTests {
 
     LOG.info("ID: " + order.id)
 
-    order = repo findById order.id
+    val iorder = repo findById order.id
 
-    LOG info order.orderNumber
+    LOG info iorder.orderNumber
 
-    LOG info order.bookingDate.toString
+    LOG info iorder.bookingDate.toString
 
     order.getOrderLines.foreach(line => LOG info line.packageType)
   }

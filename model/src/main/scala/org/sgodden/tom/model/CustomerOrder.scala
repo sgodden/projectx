@@ -63,19 +63,9 @@ class CustomerOrder() extends ICustomerOrder with Identifiable {
 
   }
 
-  override def getBookingDate = bookingDate
-  override def setBookingDate(date: LocalDate) {
-    this.bookingDate = date
-  }
-
   override def getCustomerReference = customerReference
   override def setCustomerReference(customerReference: String) {
     this.customerReference = customerReference
-  }
-
-  override def getOrderNumber: String = orderNumber
-  override def setOrderNumber(orderNumber: String) {
-    this.orderNumber = orderNumber
   }
 
   override def getCollectionDetails: ICollectionDetails = collectionDetails

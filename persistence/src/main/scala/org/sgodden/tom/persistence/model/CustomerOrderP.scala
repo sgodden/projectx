@@ -10,9 +10,9 @@ import com.novus.salat.global._
 
 case class CustomerOrderP (
     _id: ObjectId,
-    customerReference: String, 
-    orderNumber: String,
-    bookingDate: DateTime,
+    customerReference: String = null,
+    orderNumber: String = null,
+    bookingDate: DateTime = null,
     orderLines: Set[CustomerOrderLine]
   ) extends BaseP[CustomerOrder] {
 
@@ -24,8 +24,8 @@ case class CustomerOrderP (
     val ret = new CustomerOrder
     ret.id = _id.toString
     ret.setCustomerReference(customerReference)
-    ret.setOrderNumber(orderNumber)
-    ret.setBookingDate(bookingDate)
+    ret.orderNumber = orderNumber
+    ret.bookingDate = bookingDate
     orderLines.foreach(line => {
       ret.addOrderLine(line)
     })
@@ -43,8 +43,8 @@ object CustomerOrderP {
     new CustomerOrderP(
       _id = {if (order.id != null) new ObjectId(order.id) else null},
       customerReference = order.getCustomerReference,
-      orderNumber = order.getOrderNumber,
-      bookingDate = order.getBookingDate,
+      orderNumber = order.orderNumber,
+      bookingDate = order.bookingDate,
 
       /*
        * Relationships - ones that are already case classes just need casting to the concrete class
