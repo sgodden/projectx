@@ -28,6 +28,10 @@ trait ICustomerOrder extends Identity[ICustomerOrder] {
   def addOrderLine(line: ICustomerOrderLine)
   def removeOrderLine(line: ICustomerOrderLine)
 
+  def getEvents: Set[IEvent]
+  def addEvent(event: IEvent)
+  def removeEvent(event: IEvent)
+
   def getStatus: CustomerOrderStatus.Value
 }
 

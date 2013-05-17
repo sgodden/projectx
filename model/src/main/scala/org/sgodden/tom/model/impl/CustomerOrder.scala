@@ -5,7 +5,7 @@ import collection.mutable.{HashSet, Set => MutableSet}
 import org.springframework.beans.factory.annotation.{Configurable, Autowired}
 import java.util.{Date, Map => JavaMap}
 import org.joda.time.LocalDate
-import collection.JavaConverters
+import scala.collection.{mutable, JavaConverters}
 import JavaConverters._
 import javax.validation.{ConstraintViolation, Validation}
 import org.slf4j.{LoggerFactory, Logger}
@@ -35,6 +35,7 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   var collectionDetails: CollectionDetails = null
   var deliveryDetails: DeliveryDetails = null
   val orderLines: MutableSet[CustomerOrderLine] = new HashSet[CustomerOrderLine]
+  val events: MutableSet[Event] = new HashSet[Event]
 
   @Autowired
   private var stateObjects: JavaMap[String, CustomerOrderState] = null
@@ -104,6 +105,14 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   }
   override def removeOrderLine(line: ICustomerOrderLine) {
     orderLines.remove(line.asInstanceOf[CustomerOrderLine])
+  }
+
+  override def getEvents: Set[IEvent] = events.toSet
+  override def addEvent(event: IEvent) {
+    events.add(event.asInstanceOf[Event])
+  }
+  override def removeEvent(event: IEvent) {
+    events.remove(event.asInstanceOf[Event])
   }
 
   override def getStatus: CustomerOrderStatus.Value = status

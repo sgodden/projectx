@@ -1,7 +1,7 @@
 package org.sgodden.tom.services.customerorder
 
 import org.sgodden.tom.model.ICustomerOrder
-import org.sgodden.tom.model.ScanEventType._
+import org.sgodden.tom.model.EventType._
 
 trait CustomerOrderService {
 
@@ -23,5 +23,5 @@ trait CustomerOrderService {
    * @param scannerId
    * @param eventType
    */
-  def scan(orderId: String, scannerId: String, eventType: ScanEventType)
+  def scan(orderId: String, scannerId: String, eventType: EventType)
 }
