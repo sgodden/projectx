@@ -36,7 +36,7 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   var deliveryDetails: DeliveryDetails = null
   val orderLines: MutableSet[CustomerOrderLine] = new HashSet[CustomerOrderLine]
   val events: MutableSet[Event] = new HashSet[Event]
-  val _packages: MutableSet[Packige] = new HashSet[Packige]
+  private val _packages: MutableSet[Packige] = new HashSet[Packige]
 
   @Autowired
   private var stateObjects: JavaMap[String, CustomerOrderState] = null
