@@ -10,7 +10,7 @@ trait BaseService[T] {
 
   def findAll: List[T]
 
-  def merge(order: T)
+  def merge(entity: T)
 
   def findById(id: String): T
 
