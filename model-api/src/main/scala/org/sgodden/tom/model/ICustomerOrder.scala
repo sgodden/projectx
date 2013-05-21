@@ -1,7 +1,6 @@
 package org.sgodden.tom.model
 
-import org.joda.time.{LocalDate, DateTime}
-import javax.validation.constraints.NotNull
+import org.joda.time.LocalDate
 
 trait ICustomerOrder extends Identity[ICustomerOrder] {
 
@@ -32,32 +31,9 @@ trait ICustomerOrder extends Identity[ICustomerOrder] {
   def addEvent(event: IEvent)
   def removeEvent(event: IEvent)
 
+  def packages: Set[IPackage]
+  def addPackage(pkg: IPackage)
+  def removePackage(pkg: IPackage)
+
   def getStatus: CustomerOrderStatus.Value
-}
-
-trait ICollectionDetails {
-  def getAddress: IAddress
-  def setAddress(address: IAddress)
-}
-
-trait IDeliveryDetails {
-  def getAddress: IAddress
-  def setAddress(address: IAddress)
-}
-
-trait IAddress {
-  @NotNull
-  val line1: String
-  @NotNull
-  val line2: String
-  val line3: String
-  val line4: String
-  @NotNull
-  val town: String
-  val postalCode: String
-}
-
-trait ICustomerOrderLine {
-  val packageType: String
-  val descriptionOfGoods: String
 }

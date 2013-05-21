@@ -18,10 +18,11 @@ trait CustomerOrderService {
   def findById(id: String): ICustomerOrder
 
   /**
-   *
-   * @param orderId
-   * @param scannerId
-   * @param eventType
+   * Adds an event to the order based on the location of the scanner, and the current time.
+   * TODO - surely we would scan at package level.
+   * @param orderId the id of the order.
+   * @param scannerId the id of the scanner which scanned the event.
+   * @param eventType the type of event that occurred.
    */
   def scan(orderId: String, scannerId: String, eventType: EventType)
 }

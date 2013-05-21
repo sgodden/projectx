@@ -29,12 +29,6 @@ class CustomerOrderServiceImpl(
 
   override def findById(id: String): ICustomerOrder = orderRepo.findById(id)
 
-  /**
-   * Adds an event to the order based on the location of the scanner, and the current time.
-   * @param orderId the id of the order.
-   * @param scannerId the id of the scanner which scanned the event.
-   * @param eventType the type of event that occurred.
-   */
   def scan(orderId: String, scannerId: String, eventType: EventType) {
     val order = findById(orderId)
     val scanner = scannerRepo.findById(scannerId)

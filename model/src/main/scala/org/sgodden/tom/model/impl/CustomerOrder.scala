@@ -36,6 +36,7 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   var deliveryDetails: DeliveryDetails = null
   val orderLines: MutableSet[CustomerOrderLine] = new HashSet[CustomerOrderLine]
   val events: MutableSet[Event] = new HashSet[Event]
+  val _packages: MutableSet[Packige] = new HashSet[Packige]
 
   @Autowired
   private var stateObjects: JavaMap[String, CustomerOrderState] = null
@@ -113,6 +114,14 @@ class CustomerOrder() extends ICustomerOrder with Identifiable with ValidatingEn
   }
   override def removeEvent(event: IEvent) {
     events.remove(event.asInstanceOf[Event])
+  }
+
+  override def packages: Set[IPackage] = packages.toSet
+  override def addPackage(pkg: IPackage) {
+    _packages.add(pkg.asInstanceOf[Packige])
+  }
+  override def removePackage(pkg: IPackage) {
+    _packages.remove(pkg.asInstanceOf[Packige])
   }
 
   override def getStatus: CustomerOrderStatus.Value = status
