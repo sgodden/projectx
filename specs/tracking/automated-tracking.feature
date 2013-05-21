@@ -6,6 +6,8 @@ Feature: Track shipments
 
 	Notes:
 	- we need a manual option in the case of scanner or process failure
+	- to operate in multiple time zones we need to know the time zone of the location at which the scanner is registered
+	- therefore we need a new Location entity which has a time zone, prob falling back to country time zone if not specified.
 
 	Scenario: A package is scanned on arrival at a particular location
 

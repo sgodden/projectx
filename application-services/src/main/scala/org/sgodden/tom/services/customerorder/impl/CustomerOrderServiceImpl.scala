@@ -2,39 +2,43 @@ package org.sgodden.tom.services.customerorder.impl
 
 import org.sgodden.tom.services.customerorder.CustomerOrderService
 import org.sgodden.tom.model.EventType._
-import org.sgodden.tom.model.{ICustomerOrder, CustomerOrderFactory, CustomerOrderRepository}
+import org.sgodden.tom.model._
 import org.springframework.stereotype.Service
+import org.sgodden.tom.model.EventType.EventType
+import org.joda.time.DateTime
 
 @Service
 class CustomerOrderServiceImpl(
-    repository: CustomerOrderRepository,
-    factory: CustomerOrderFactory) extends CustomerOrderService {
+    orderRepo: CustomerOrderRepository,
+    scannerRepo: ScannerRepository,
+    orderFactory: CustomerOrderFactory,
+    eventFactory: EventFactory) extends CustomerOrderService {
 
-  override def create: ICustomerOrder = factory.create
+  override def create: ICustomerOrder = orderFactory.create
 
   override def persist(customerOrder: ICustomerOrder) = {
-    repository.persist(customerOrder)
+    orderRepo.persist(customerOrder)
     customerOrder.id
   }
 
-  override def remove(id: String) = repository.remove(repository.findById(id))
+  override def remove(id: String) = orderRepo.remove(orderRepo.findById(id))
 
-  override def findAll: List[ICustomerOrder] = repository.findAll
+  override def findAll: List[ICustomerOrder] = orderRepo.findAll
 
-  override def merge(order: ICustomerOrder) =  repository merge order
+  override def merge(order: ICustomerOrder) =  orderRepo merge order
 
-  override def findById(id: String): ICustomerOrder = repository.findById(id)
+  override def findById(id: String): ICustomerOrder = orderRepo.findById(id)
 
   /**
-   *
-   * @param orderId
-   * @param scannerId
-   * @param eventType
+   * Adds an event to the order based on the location of the scanner, and the current time.
+   * @param orderId the id of the order.
+   * @param scannerId the id of the scanner which scanned the event.
+   * @param eventType the type of event that occurred.
    */
   def scan(orderId: String, scannerId: String, eventType: EventType) {
-    eventType match {
-      case LOAD => println("LOAD!!")
-      case UNLOAD => println("UNLOAD!!")
-    }
+    val order = findById(orderId)
+    val scanner = scannerRepo.findById(scannerId)
+    order.addEvent(eventFactory.create(scanner.location, new DateTime, eventType))
+    orderRepo.merge(order)
   }
 }
