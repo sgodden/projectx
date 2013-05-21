@@ -4,6 +4,6 @@ import org.sgodden.tom.model.IPackage
 
 class Packige extends IPackage {
 
-  var packageId: String
+  var packageId: String = null
 
 }
